@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+    <style>
+        .logo {
+            margin-left: 50px;
+            margin-top: 10px;
+            color: deepskyblue;
+        }
+
+        /* 
+        .newCollection{
+            margin-left: 390px;
+            margin-top: 250px;
+            height:40px;   
+            width: 250px;
+
+        }
+        .addCollection{
+            margin-left: -10px;
+        } */
+
+        #modal-image {
+            object-fit: cover;
+            clip-path: inset(0 50% 0 0);
+            min-width: 50%;
+            height: 400px;
+            /* Set the desired height of the image */
+        }
+
+        .collection {
+            display: flex;
+            margin-left: 360px;
+            margin-top: 0px;
+            /* align-items: center; */
+        }
+
+        .text-black {
+            /* width: 70%;
+            padding: 10px; */
+            height: 40px;
+            width: 250px;
+        }
+
+        .addCollection {
+            padding: 10px;
+            height: 40px;
+            width: 200px;
+            text-align: center;
+            background-color: white;
+            color: rgb(55, 119, 215);
+            border: 2px solid rgb(55, 119, 215);
+
+        }
+
+        .saveChange {
+            margin-left: 360px;
+            /* margin-top: 250px; */
+            margin-top: 20px;
+            width: 410px;
+            color: white;
+            background-color: rgb(55, 119, 215);
+            height: 40px;
+            border: none;
+
+        }
+
+        .collectionList {
+            margin-left: 400px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            max-height: 230px;
+            overflow-y: scroll;
+            /* border: 1px solid #ccc; */
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .selected {
+            color: rgb(55, 119, 215);
+        }
+
+        .downloadButton {
+            margin-top: 300px;
+            width: 320px;
+            margin-left: 100px;
+        }
+
+        .mycollection{
+            border: 2px solid gray;
+            width: 200px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pos-f-t" style="background-color: black;">
+        <nav class="navbar navbar-expand-sm navbar-light" style="padding-top: 0; padding-bottom: 0;">
+
+
+            <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 30px;">
+                <ul class=" nav nav-pills">
+                    <li class="nav-item mr-5">
+                        <b><a class="nav-link text-white" href="#">Home</a> </b>
+                    </li>
+
+                    <li class="nav-item mr-5">
+                        <b> <a class="nav-link text-white" href="#">About</a> </b>
+                    </li>
+                    <li class="nav-item mr-5">
+                        <b> <a class="nav-link text-white" href="#">Services</a></b>
+                    </li>
+                    <li class="nav-item mr-5">
+                        <b> <a class="nav-link text-white" href="#">Contact</a></b>
+                    </li>
+
+                </ul>
+
+                <ul class=" nav nav-pills ml-auto">
+
+                    <li class="nav-item mr-5">
+                        <b> <a class="nav-link text-white  " href="#">Login</a></b>
+                    </li>
+                    <li class="nav-item mr-5">
+                        <b> <a class="nav-link text-white" href="#">Sign In</a></b>
+                    </li>
+
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="container">
+                <div class="logo">
+                    <b>
+                        <h4>FreeStock</h4>
+                    </b>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="input-group">
+                <input type="text" class="form-control searchText" id="searchName"
+                    placeholder="Search high-resolution image" style="height: 50px;">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <a href="myCollection.html" data-toggle="modal" data-target="#imageModal1">
+            <button type="button" id="myCollection" class="btn mycollection"><b>My Collection </b></button>
+        </a>
+        </div>
+    </div>
+    <hr>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 text-center">
+                <h2>Image Preview</h2>
+                <!-- Display the image based on the URL parameter -->
+                <img id="imagePreview" src="" alt="Image Preview" class="img-thumbnail">
+            </div>
+            <div class="col-md-4 downloadButton">
+                <button type="button" class="btn btn-success" id="download"><i class="fa fa-download"></i> Download
+                    Image</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 10px; margin-left: 500px;">
+        <div>
+            <button id="addCollection" class="btn-sm btn btn-outline-secondary col-md-2"><i
+                    class="fa fa-plus-square"></i> add to collection</button>
+            <button id="like" class="btn-sm btn btn-outline-secondary col-md-1"><i class="fa fa-heart"></i>
+                Like</button>
+            <button id="share" class="btn-sm btn btn-outline-secondary col-md-1"><i class="fa fa-share-alt"></i>
+                Share</button>
+        </div>
+    </div>
+
+    <div id="collectionModel" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+
+
+
+
+                <!-- <form id="parameters-form" class="form-horizontal"> -->
+
+                <div class="modal-body" style="height: 500px;">
+                    <button type="button" class="close float-right" data-dismiss="modal">&times;</button>
+                    <img src="" id="modal-image" alt="Modal Image">
+                    <!-- style="width: 50%; height: 400px;" -->
+                    <h3 style="margin-left: 470px; margin-top: -370px;">Add to collection</h3>
+
+                    <b>
+                        <!-- <p id="collectionName" class="collectionList"></p> -->
+                        <ul class="collectionList" id="collectionName"> </ul>
+                    </b>
+
+
+                    <div class="collection">
+                        <input type="text" id="newCollection" class="text-black newCollection"
+                            placeholder="Create new Collection">
+                        <button type="button" id="addnewCollection" class="addCollection"><b>Add collection</b></button>
+
+                    </div>
+                    <button type="button" id="saveChange" class="saveChange"><b>Save Changes</b></button>
+
+
+                </div>
+
+                <!-- </form> -->
+            </div>
+        </div>
+    </div>
+
+
+    <div style="margin-top: 100px;"></div>
+
+    <!-- JavaScript to set the image source based on the URL parameter -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script>
+        // Function to retrieve URL parameters
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Get the 'src' parameter from the URL
+        var srcParameter = getParameterByName('src');
+
+        // Set the 'src' attribute of the image element
+        if (srcParameter) {
+            document.getElementById('imagePreview').src = srcParameter;
+
+        }
+
+        function setModalImage(imageUrl) {
+            var modalImage = document.getElementById('modal-image');
+            modalImage.src = imageUrl;
+        }
+
+        // Get the 'src' parameter from the URL
+        var srcParameter = getParameterByName('src');
+
+        // Set the 'src' attribute of the modal image
+        if (srcParameter) {
+            setModalImage(srcParameter);
+        }
+
+
+        $("#addCollection").click(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:8082/getCollectionList/" + $.cookie("userId"),
+                contentType: "application/json",
+                success: function (response) {
+                    var data = $.parseJSON(JSON.stringify(response));
+
+                    if (data.length > 0) {
+
+                        for (var i = 0; i < data.length; i++) {
+                            $("#newCollection").val("");
+                            $("#collectionName").append("<li>" + data[i] + "<hr> </li>");
+                        }
+                    }
+                },
+            })
+
+
+
+            $('#collectionModel').modal('show');
+
+        });
+
+
+
+        $("#addnewCollection").click(function () {
+            var collectionValue = $("#newCollection").val();
+            if (!isCollectionNameExist(collectionValue)) {
+                $("#newCollection").val("");
+                $("#collectionName").append("<li class='selected'>" + collectionValue + "<hr> </li>");
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Collection name is already exists!',
+                    footer: 'make diffrent name collection'
+                })
+            }
+        });
+
+
+        function isCollectionNameExist(collectionValue) {
+            var names = $("#collectionName li").map(function () {
+                return $(this).text().trim();
+            }).get();
+            return names.includes(collectionValue);
+        }
+
+
+        $("#collectionName").on('click', 'li', function () {
+            var selectedNames = [];
+            $(this).toggleClass("selected"); // Toggle the class on the clicked item
+        });
+
+
+        $("#saveChange").click(function () {
+            var selectedNames = [];
+            $("#collectionName li.selected").each(function () {
+                selectedNames.push($(this).text().trim());
+            });
+
+
+
+            var formData = new FormData();
+
+            formData.append("name", $.cookie('userName'));
+            formData.append("id", $.cookie("userId"));
+
+            var imageUrl = $("#imagePreview").attr("src"); // Assuming the modal image is the image you want to send
+            var url = new URL(imageUrl);
+           
+             var imagePath = url.pathname;
+                    formData.append("image",imagePath);
+
+                    
+
+                    formData.append("collectionName", selectedNames);
+
+
+                    $.ajax({
+                        url: "http://localhost:8082/addCollection",
+                        type: "POST",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            // Handle success
+                        },
+                        error: function (error) {
+                            alert("error", error)
+                        }
+                    });
+                    window.location.href = document.referrer;
+               
+
+        });
+
+        // var startIndex = image.indexOf("8082/") + 5;
+        // var imagePath = image.substring(startIndex);
+        $("#download").click(function () {
+
+             var imageUrl = $("#imagePreview").attr("src");
+
+
+            var imageName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);// Replace this with the name of your image
+           
+            
+            fetch(imageUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    var url = window.URL.createObjectURL(blob);
+                    var link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', imageName); // Use the same image name for the download attribute
+                    link.click();
+                });
+        });
+    </script>
+</body>
+
+</html>

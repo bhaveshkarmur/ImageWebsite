@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    <!-- <link rel="stylesheet" type="text/css" href="static/css/page.css"> -->
+
+    <style>
+        /* Define a custom CSS class for your background image */
+        .bg-image {
+            background-color: white;
+            background-image: url('static/Images/backgroung_Image.jpg');
+            background-size: cover;
+            /* Optional: Adjust the background size as needed */
+            height: 60vh;
+            /* Additional styles as needed */
+        }
+
+        .logo {
+            margin-left: 50px;
+            margin-top: 10px;
+            color: white;
+        }
+
+
+        .image-container {
+            position: relative;
+            /* Required for positioning the caption relative to this container */
+            height: 240px;
+            width: 300px;
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            /* Position the caption at the bottom */
+            left: 0;
+            /* Position the caption at the left side */
+            width: 100%;
+            /* Make the caption width 100% of the container */
+            background-color: white;
+            /* Add a background color with opacity for readability */
+            color: rgb(16, 14, 14);
+            /* Text color for the caption */
+            text-align: center;
+            padding: 10px;
+            /* Add some padding for spacing */
+            border-left: 1px solid rgb(235, 232, 232);
+            border-right: 1px solid rgb(235, 232, 232);
+            border-bottom: 1px solid rgb(235, 232, 232);
+            border-radius: 2px;
+        }
+
+        .imageCollections {
+            margin: 60px;
+        }
+
+        .random-image-container {
+            position: relative;
+            /* height: 400px;
+            width: 300px; */
+        }
+
+        .random-image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            /* margin: 50px; */
+            margin-bottom: 100px;
+
+        }
+
+        .random-image-gallery img {
+            width: 400px;
+            /* margin-bottom: 10px; */
+            height: 300px;
+            /* border-radius: 20px; */
+
+        }
+
+        .random-image-container {
+            margin-bottom: 80px;
+            margin-left: 20px;
+            /* border-radius: 50px;*/
+        }
+
+        .random-image-with-hover {
+            position: relative;
+
+
+        }
+
+        .random-image-with-hover::before {
+
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 24px;
+            display: none;
+        }
+
+
+
+        .random-image-container i {
+
+            color: white;
+            position: absolute;
+            top: 7%;
+            left: 95%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        .random-image-caption {
+            margin-top: 20px;
+            position: absolute;
+            bottom: -45px;
+            /* Position the caption at the bottom */
+            left: 0;
+            /* Position the caption at the left side */
+            width: 100%;
+            /* Make the caption width 100% of the container */
+            background-color: white;
+            /* Add a background color with opacity for readability */
+            color: rgb(16, 14, 14);
+            /* Text color for the caption */
+            text-align: center;
+            padding: 10px;
+            /* Add some padding for spacing */
+            border-left: 1px solid rgb(235, 232, 232);
+            border-right: 1px solid rgb(235, 232, 232);
+            border-bottom: 1px solid rgb(235, 232, 232);
+            border-radius: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="background-color: rgb(241, 244, 245);">
+        <div class="bg-image">
+
+
+            <div class="row">
+                <div class="col-md-2" style="margin-top:20px;">
+                    <div class="container">
+                        <div class="logo">
+                            <b>
+                                <h4>FreeStock</h4>
+                            </b>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-10" style="margin-top:20px;">
+
+                    <div class="pos-f-t">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class=" nav nav-pills">
+                                    <li class="nav-item ">
+                                        <b><a class="nav-link text-white" href="#">Photos</a> </b>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <b> <a class="nav-link text-white" href="#">Vector</a> </b>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <b> <a class="nav-link text-white" href="#">AI Images</a></b>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <b> <a class="nav-link text-white" href="#">Icons</a></b>
+                                    </li>
+                                    <li class="nav-item">
+                                        <b> <a class="nav-link text-white" href="#">3D</a></b>
+                                    </li>
+                                    <li class="nav-item">
+                                        <b> <a class="nav-link text-white" href="#">PSD</a></b>
+                                    </li>
+                                    <li class="nav-item">
+                                        <b> <a class="nav-link text-white" href="#">Fonts</a></b>
+                                    </li>
+
+                                </ul>
+
+                                <ul class=" nav nav-pills ml-auto">
+
+                                    <li class="nav-item ">
+                                        <b> <a class="nav-link text-white  " href="#">Login</a></b>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <b> <a class="nav-link text-white" href="SignIn.html">Sign In</a></b>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+            </br>
+            </br>
+            </br>
+            </br>
+            <div class="text-center text-white">
+                <b>
+                    <h3>Free Photos to tell any story</h3>
+                </b>
+            </div>
+            </br>
+            <div class="text-center text-white">
+                <b>
+                    <h4>Find millions of top-quality photos that will leave your audience speechles</h4>
+                </b>
+            </div>
+            </br>
+
+
+            <div class="row">
+                <div class="col-md-3"></div>
+
+
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control searchText" id="searchName"
+                            placeholder="Search high-resolution image" style="height: 50px;">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <br>
+        <br>
+        <div class="text-center">
+            <h3>The right photo for every moment</h3>
+            </br>
+            <!-- </br> -->
+            <h5 style="color:#6f7878">Surf categories of professional photos to express your ideas and connect with
+                your audience</h5>
+
+        </div>
+        </br>
+        </br>
+
+        <div class="row" style="margin:20px;">
+            <div class="col-md-3">
+                <div class="image-container">
+                    <a href="natureImages.html" data-toggle="modal" data-target="#imageModal1">
+                        <img src="static/Images/nature1.jpg" alt="Image 1" class="img-thumbnail">
+
+                        <div class="image-caption">
+                            <h6>Nature </h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="image-container">
+                    <a href="people_Emotion.html" data-toggle="modal" data-target="#imageModal1">
+                        <img src="static/Images/people_immotion.jpg" alt="Image 1" class="img-thumbnail">
+
+                        <div class="image-caption">
+                            <h6>People and emotion</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="image-container">
+                    <a href="Education.html" data-toggle="modal" data-target="#imageModal1">
+                        <img src="static/Images/education.jpg" alt="Image 1" class="img-thumbnail">
+
+                        <div class="image-caption">
+                            <h6>Education and learning</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="image-container">
+                    <a href="Business.html" data-toggle="modal" data-target="#imageModal1">
+                        <img src="static/Images/business.jpg" alt="Image 1" class="img-thumbnail">
+
+                        <div class="image-caption">
+                            <h6>Business and marketing</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+        </br>
+
+        <div class="row" style="margin:20px;">
+            <div class="col-md-3">
+                <div class="image-container">
+                    <a href="#" data-toggle="modal" data-target="#imageModal1">
+                        <img src="static/Images/lifestyle.jpg" alt="Image 1" class="img-thumbnail">
+                    </a>
+                    <div class="image-caption">
+                        <h6>Lifestyle,health and wellness</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="image-container">
+                    <a href="#" data-toggle="modal" data-target="#imageModal1">
+                        <img src="static/Images/food.jpg" alt="Image 1" class="img-thumbnail">
+                    </a>
+                    <div class="image-caption">
+                        <h6>Food and drink</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="image-container">
+                    <a href="#" data-toggle="modal" data-target="#imageModal1">
+                        <img src="static/Images/sports.jpg" alt="Image 1" class="img-thumbnail">
+                    </a>
+                    <div class="image-caption">
+                        <h6>Sport</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="image-container">
+                    <a href="Animal.html" data-toggle="modal" data-target="#imageModal1">
+                        <img src="static/Images/Animal.jpg" alt="Image 1" class="img-thumbnail">
+                    </a>
+                    <div class="image-caption">
+                        <h6>Animal And Birds</h6>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <br>
+    </div>
+
+    <div class="imageCollections">
+        <h2>The inspiration gallery</h2>
+        <p>Explore curated collections and discover images, moods, and styles to ignite your creativity</p>
+
+        <div class="row" style="margin-top: 30px">
+            <div class="col-md-12">
+                <div class="random-image-container">
+
+                    <div class="random-image-gallery">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script>
+
+        $('#searchName').keypress(function (e) {
+            if (e.which === 13) { // Check if the key pressed is 'Enter'
+                // Get the value from the input field
+                var searchValue = $('#searchName').val();
+
+                window.location.href = "SearchImage.html?search=" + searchValue;
+
+            }
+        });
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8082/randomImage",
+                contentType: "application/json",
+                dataSrc: '',
+                success: function (response) {
+                    $.each(response, function (key, value) {
+                        var images = value; //
+                        var imageGallery = $('.random-image-gallery'); // Select by class instead of ID
+                        var imagePath = "http://localhost:8082/" + images[0];
+                        var imageElement = $('<img>').attr('src', imagePath).addClass('img-thumbnail');
+
+                        // Create a link to open the image in "image.html"
+                        var imageLink = $('<a>').attr('href', 'RandomImageCollecction.html?name=' + encodeURIComponent(key))
+                            .attr('target', '_blank');
+
+                        imageLink.append(imageElement);
+
+                        var imageContainer = $('<div>').addClass('random-image-container random-image-with-hover');
+
+                        var imagecaption = $('<h6>').addClass('random-image-caption');
+                        // var lock = $('<i>').addClass('fa fa-lock lockIcon');
+                        // lock.css('color', 'black');
+                        // lock.css('display', 'block');
+                        // imagecaption.append(lock);
+
+                        imagecaption.append(key);
+
+
+                        // var detail=$('<div>').addClass('detail');
+                        //     var count = images.length;
+
+                        //     detail.append(count+" resources");
+
+                        //     imagecaption.append(detail)
+
+                        imageContainer.append(imagecaption);
+                        imageContainer.append(imageLink);
+
+                        var icon = $('<i>').addClass('fa fa-external-link icon-hidden');
+                        imageContainer.append(icon);
+                        imageContainer.appendTo(imageGallery);
+
+                        imageGallery.on('mouseenter', '.random-image-container', function () {
+                            $(this).find('i').css('display', 'block'); // Show the icon
+                        });
+
+                        imageGallery.on('mouseleave', '.random-image-container', function () {
+                            $(this).find('i').css('display', 'none'); // Hide the icon
+                        });
+
+
+                    });
+                },
+                error: function (error) {
+                    // Handle error
+                    console.error('Error:', error);
+                }
+            });
+        });
+
+    </script>
+
+
+
+
+
+
+
+</body>
+
+
+
+
+</html>

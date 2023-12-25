@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Page</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+        .image {
+  width: 70%;
+  height: 100vh;
+}
+
+.logo,
+.logIn,
+.welcom,
+.logIn-btn {
+  text-align: center;
+  position: absolute;
+  top: 20%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+}
+
+.label {
+  position: absolute;
+  top: 20%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  margin-top: 200px;
+}
+
+.logo {
+  color: deepskyblue;
+}
+
+.logIn {
+  margin-top: 50px;
+}
+
+.welcom {
+  margin-top: 100px;
+}
+
+.logInOption {
+    margin-top: -90px;
+    height: 35px;
+    position: absolute;
+   /* top: 20%;  */
+  left: 78%;
+   /* margin-top: 200px;  */
+   position: relative; 
+  /* text-align: center; */
+}
+
+.textBox {
+  width: 250px;
+   margin-right: -50px; 
+  border: 1px solid rgb(32, 30, 29);
+}
+.emailtext{
+margin-top: -410px;
+}
+
+.userText {
+  margin-top: -355px;
+}
+
+.username {
+  margin-top: 260px;
+}
+
+.pass {
+  margin-top: 280px;
+}
+
+.Password {
+  margin-top: -330px;
+}
+
+.logIn-btn {
+  margin-top: 370px;
+  width: 100px;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <img src="https://source.unsplash.com/random" class="image">
+
+    <div class="logo">
+        <h2>FreeStock</h2>
+    </div>
+    <div class="logIn">
+        <h5>Log In</h5>
+    </div>
+    <div class="welcom">
+        <h6>Welcome  back!</h6>
+    </div>
+
+
+
+    <div class="row" style="display: flex;">
+        <label for="email" class="email label">Email ID :</label>
+      
+            <input type="email" id="email" name="email" class="emailtext textBox logInOption" placeholder=" abc@gmail.com">
+        
+    </div>
+    <!-- <div class="row">
+        <label for="userName" class="username label">UserName :</label>
+       
+            <input type="text" id="userName" name="uName" class="userText textBox signInOption" placeholder=" bhavesh">
+       
+    </div> -->
+    <div class="row">
+        <label for="password" class="pass label">Password :</label>
+
+            <input type="password" id="password" name="password" class="Password textBox logInOption" placeholder="Password">
+        
+    </div>
+
+    <button type="button" id="logIn" class="btn btn-success logIn-btn">Log In</button>
+ 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+
+        $("#logIn").click(function () {
+            var jsonData = {
+                "userName": $("#userName").val(),
+                "email": $("#email").val(),
+                "password": $("#password").val(),
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8082/saveUser", // Replace with your API endpoint URL
+                contentType: "application/json",
+                data: JSON.stringify(jsonData),
+
+                success: function (response) {
+                    // var data = $.parseJSON(JSON.stringify(response));
+                    $.cookie('userId', response.userId);
+                    $.cookie('userName', response.userName);
+                    window.location.href = "index.html"
+                },
+                error: function (error) {
+
+                    if($("#userName").val() !="" && $("#email").val() !="" && $("#password").val()!=""){
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Email exists',
+                        text: 'Please use different Email id !',
+                        footer: '<a href="">Why do I have this issue?</a>'
+                    })
+                }else{
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Detail is not valid',
+                        text: 'Please Enter valid Details!',
+                        footer: '<a href="">Why do I have this issue?</a>'
+                    })
+                }
+                }
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>
