@@ -221,6 +221,14 @@ margin-top: -410px;
                 "password": $("#password").val(),
             };
 
+            if($("#userName").val() =="" || $("#email").val() =="" || $("#password").val()==""){
+                            Swal.fire({
+                        icon: 'warning',
+                        title: 'Detail is not valid',
+                        text: 'Please Enter valid Details!',
+                        footer: '<a href="">Why do I have this issue?</a>'
+                    })
+                           }else{
             $.ajax({
                 type: "POST",
                 url: "http://127.0.0.1:8082/saveUser", // Replace with your API endpoint URL
@@ -231,10 +239,9 @@ margin-top: -410px;
                     // var data = $.parseJSON(JSON.stringify(response));
                     $.cookie('userId', response.id);
                     $.cookie('userName', response.uname);
-                    window.location.href = "index.html"
+                    history.back();
                 },
                 error: function (error) {
-
                     if($("#userName").val() !="" && $("#email").val() !="" && $("#password").val()!=""){
                     Swal.fire({
                         icon: 'warning',
@@ -242,16 +249,11 @@ margin-top: -410px;
                         text: 'Please use different Email id !',
                         footer: '<a href="">Why do I have this issue?</a>'
                     })
-                }else{
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Detail is not valid',
-                        text: 'Please Enter valid Details!',
-                        footer: '<a href="">Why do I have this issue?</a>'
-                    })
                 }
+                
                 }
             });
+        }
 
         });
 

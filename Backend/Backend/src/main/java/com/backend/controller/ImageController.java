@@ -16,7 +16,7 @@ import com.backend.model.PeopleAndEmotions;
 import com.backend.service.ImageService;
 
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class ImageController {
 
 	@Autowired

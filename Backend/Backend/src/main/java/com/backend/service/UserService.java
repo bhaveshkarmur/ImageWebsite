@@ -1,7 +1,10 @@
 package com.backend.service;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,8 +53,46 @@ public class UserService {
 	return	userCollectionRepo.getAllCollections(id);
 	}
 	
-	public List<USerCollection> getCollections(long id){
-		return userCollectionRepo.getCollections(id);
+
+	
+	public Map<String, List<String>> getCollections(long id) {
+	    List<USerCollection> allImage = userCollectionRepo.getCollections(id);
+
+	    Map<String, List<String>> imageByCollections = new HashMap<>();
+
+	    for (USerCollection userCollection : allImage) {
+	        String collectionName = userCollection.getCollectionName();
+	        String imagePath = userCollection.getPath();
+
+	        // Check if the collection is already in the map
+	        if (imageByCollections.containsKey(collectionName)) {
+	            // Collection exists, add the image path to the existing list
+	            imageByCollections.get(collectionName).add(imagePath);
+	        } else {
+	            // Collection doesn't exist, create a new list and add the image path
+	            List<String> images = new ArrayList<>();
+	            images.add(imagePath);
+	            imageByCollections.put(collectionName, images);
+	        }
+	    }
+
+	    return imageByCollections;
+	}
+
+	
+	public User Signup(String email,String password) {
+		
+		User user=userRepo.getPassword(email);
+		String pass=user.getPassword();
+		byte[] originalPassword=Base64.getDecoder().decode(pass.getBytes());
+		 String decodedPassword = new String(originalPassword);
+		System.out.println(decodedPassword);
+		
+		if(!password.equals(decodedPassword)) {
+			user=null;
+		}
+		return user;
+		
 	}
 
 }

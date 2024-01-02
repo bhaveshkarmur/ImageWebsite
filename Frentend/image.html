@@ -99,7 +99,7 @@
             margin-left: 100px;
         }
 
-        .mycollection{
+        .mycollection {
             border: 2px solid gray;
             width: 200px;
             height: 50px;
@@ -115,29 +115,39 @@
 
             <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 30px;">
                 <ul class=" nav nav-pills">
-                    <li class="nav-item mr-5">
-                        <b><a class="nav-link text-white" href="#">Home</a> </b>
+                    <li class="nav-item ">
+                        <b><a class="nav-link text-white" href="#">Photos</a> </b>
                     </li>
 
-                    <li class="nav-item mr-5">
-                        <b> <a class="nav-link text-white" href="#">About</a> </b>
+                    <li class="nav-item">
+                        <b> <a class="nav-link text-white" href="#">Vector</a> </b>
                     </li>
-                    <li class="nav-item mr-5">
-                        <b> <a class="nav-link text-white" href="#">Services</a></b>
+                    <li class="nav-item ">
+                        <b> <a class="nav-link text-white" href="#">AI Images</a></b>
                     </li>
-                    <li class="nav-item mr-5">
-                        <b> <a class="nav-link text-white" href="#">Contact</a></b>
+                    <li class="nav-item ">
+                        <b> <a class="nav-link text-white" href="#">Icons</a></b>
+                    </li>
+                    <li class="nav-item">
+                        <b> <a class="nav-link text-white" href="#">3D</a></b>
+                    </li>
+                    <li class="nav-item">
+                        <b> <a class="nav-link text-white" href="#">PSD</a></b>
+                    </li>
+                    <li class="nav-item">
+                        <b> <a class="nav-link text-white" href="#">Fonts</a></b>
                     </li>
 
                 </ul>
 
+
                 <ul class=" nav nav-pills ml-auto">
 
                     <li class="nav-item mr-5">
-                        <b> <a class="nav-link text-white  " href="#">Login</a></b>
+                        <b> <a class="nav-link text-white  " href="SignUp.html">Sign Up</a></b>
                     </li>
                     <li class="nav-item mr-5">
-                        <b> <a class="nav-link text-white" href="#">Sign In</a></b>
+                        <b> <a class="nav-link text-white" href="SignIn.Html">Sign In</a></b>
                     </li>
 
                 </ul>
@@ -167,8 +177,8 @@
         </div>
         <div class="col-md-2">
             <a href="myCollection.html" data-toggle="modal" data-target="#imageModal1">
-            <button type="button" id="myCollection" class="btn mycollection"><b>My Collection </b></button>
-        </a>
+                <button type="button" id="myCollection" class="btn mycollection"><b>My Collection </b></button>
+            </a>
         </div>
     </div>
     <hr>
@@ -361,43 +371,67 @@
 
             var imageUrl = $("#imagePreview").attr("src"); // Assuming the modal image is the image you want to send
             var url = new URL(imageUrl);
-           
-             var imagePath = url.pathname;
-                    formData.append("image",imagePath);
 
-                    
-
-                    formData.append("collectionName", selectedNames);
+            var imagePath = url.pathname;
+            formData.append("image", imagePath);
 
 
-                    $.ajax({
-                        url: "http://localhost:8082/addCollection",
-                        type: "POST",
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        success: function (response) {
-                            // Handle success
-                        },
-                        error: function (error) {
-                            alert("error", error)
-                        }
-                    });
-                    window.location.href = document.referrer;
-               
 
+            formData.append("collectionName", selectedNames);
+            var userName = $.cookie('userName');
+            var userId = $.cookie('userId');
+
+            if (userName === null || userName === undefined || userId === null || userId === undefined) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'You are not logged in',
+                    text: 'Please sign up or sign in!',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sign In',
+                    cancelButtonText: 'Sign Up',
+                    reverseButtons: true,
+                    showCloseButton: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Handle Sign In button click
+                        window.location.href = 'SignIn.html';
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        // Handle Sign Up button click
+                        window.location.href = 'SignUp.html';
+                    }
+                });
+            } else {
+
+
+
+                $.ajax({
+                    url: "http://localhost:8082/addCollection",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        // Handle success
+                    },
+                    error: function (error) {
+                        alert("error", error)
+                    }
+                });
+                window.location.href = document.referrer;
+
+            }
         });
 
         // var startIndex = image.indexOf("8082/") + 5;
         // var imagePath = image.substring(startIndex);
         $("#download").click(function () {
 
-             var imageUrl = $("#imagePreview").attr("src");
+            var imageUrl = $("#imagePreview").attr("src");
 
 
             var imageName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);// Replace this with the name of your image
-           
-            
+
+            alert(imageUrl);
             fetch(imageUrl)
                 .then(response => response.blob())
                 .then(blob => {

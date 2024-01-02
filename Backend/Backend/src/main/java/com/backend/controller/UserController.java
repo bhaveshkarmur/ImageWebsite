@@ -19,7 +19,7 @@ import com.backend.model.user.User;
 import com.backend.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "*")
+//@CrossOrigin("*")
 public class UserController {
 
 	@Autowired
@@ -44,69 +44,17 @@ public class UserController {
 	public List<String> getAllCollections(@PathVariable long id){
 		return userService.getAllCollections(id);
 	}
-//	
-//	@GetMapping("/allCollection/{id}")
-//	public Map<String,List<String>> getCOllections(@PathVariable long id){
-//		List<USerCollection> allImage= userService.getCollections(id);
-//		
-//		Map<String,List<String>> imageByCollections=new HashMap<>();
-//		
-//		List<String> images=new ArrayList<>();
-//		String collectionName=allImage.get(0).getCollectionName();
-//		for(int i=0; i<allImage.size(); i++) {
-//			
-//			images.add(allImage.get(i).getPath());
-//			
-//			if(!collectionName.equals(allImage.get(i).getCollectionName())) {
-//				imageByCollections.put(collectionName, images);
-//				System.out.println(allImage.get(i).getCollectionName());
-//				collectionName=allImage.get(i).getCollectionName();
-//				images=new ArrayList<>();
-//			}
-////			if(collectionName.equals(allImage.get(i).getCollectionName())) {
-////				
-////			}
-//			
-//			if(!collectionName.equals(allImage.get(i).getCollectionName())) {
-////				imageByCollections.put(collectionName, images);
-//				
-//			}
-//				
-//		}
-//		return imageByCollections;
-//	}
-	
+
 	@GetMapping("/allCollection/{id}")
 	public Map<String, List<String>> getCollections(@PathVariable long id) {
-	    List<USerCollection> allImage = userService.getCollections(id);
-
-	    Map<String, List<String>> imageByCollections = new HashMap<>();
-
-	    if (!allImage.isEmpty()) {
-	        List<String> images = new ArrayList<>();
-	        String currentCollectionName = allImage.get(0).getCollectionName();
-
-	        for (USerCollection userCollection : allImage) {
-	            String collectionName = userCollection.getCollectionName();
-	            String imagePath = userCollection.getPath();
-
-	            if (!collectionName.equals(currentCollectionName)) {
-	                // Add the current collection to the map
-	                imageByCollections.put(currentCollectionName, new ArrayList<>(images));
-
-	                // Start a new collection
-	                currentCollectionName = collectionName;
-	                images.clear();
-	            }
-
-	            images.add(imagePath);
-	        }
-
-	        // Add the last collection to the map
-	        imageByCollections.put(currentCollectionName, new ArrayList<>(images));
-	    }
-
-	    return imageByCollections;
+	  
+	    return userService.getCollections(id);
+	}
+	
+	@PostMapping("/signUp")
+	public User signup(@RequestBody User user) {
+		System.out.println(userService.Signup(user.getEmail(), user.getPassword()));
+		return userService.Signup(user.getEmail(), user.getPassword());
 	}
 
 }
